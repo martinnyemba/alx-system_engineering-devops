@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Bash script that configures a new Ubuntu machine to respect above requirements
+#+	Configure HAproxy so that it send traffic to web-01 and web-02
+#+	Distribute requests using a roundrobin algorithm
+
+# Configure HAproxy so that it send traffic to web-01 and web-02
+balancer="\
+frontend haproxy_balancer
+    bind *:80
+    mode http
+    default_backend webservers
+    
+backend webservers
+    balance roundrobin
+    server 115888-web-01 34.224.15.93:80 check
+    server 115888-web-02 100.26.136.213:80 check
+"
+# Update all the packages and upgrade
+apt-get -y update
+apt-get -y upgrade
+
+# Add HAProxy PPA
+apt-get -y install software-properties-common
+add-apt-repository -y ppa:vbernat/haproxy-2.5
+apt-get -y update
+
+# Install HAProxy
+# configure HAProxy by editing its file located at /etc/haproxy/haproxy.cfg
+apt-get -y install haproxy
+cp -a /etc/haproxy/haproxy.cfg{,.orig}
+echo "$balancer" >> /etc/haproxy/haproxy.cfg
+service haproxy restart
