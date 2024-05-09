@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Pings an IP address received as a string argument 5 times.
+
+# checks if number of arguments passed to the script ($#)
+if [ "$#" -eq 0 ]
+then
+# If no arguments are provided to the script, it prints a usage
+  echo "Usage: 5-is_the_host_on_the_network {IP_ADDRESS}"
+  else
+# executes the ping command with the -c option
+    ping -c 5 "$1"
+    fi
