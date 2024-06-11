@@ -1,1 +1,35 @@
 https://imgur.com/QHInGe2
+
+server - A computer devices that is able to provide services and resources to other devices over a network.
+
+Role of the domain name - This is the human readable address of our website in this case being "www.foobar.com". 
+                          It makes it easier for users to find a website than using the IP address.
+
+
+
+What type of DNS record www is in www.foobar.com
+
+"www" in www.foobar.com is a canonical Name record, it points to the server "foobar.com" to ensure that user can reach the intended website.
+
+
+role of the web server - Handling HTTP User request. 
+                 It acts as a mediator between incoming traffic from the user and process and foward the requests to the application server ensuring that the user receives web content requested.
+
+role of the application server - Handles excecution of the server side code and communicates to the database to retreive or store information.
+
+role of the database - Helps to organize the collection of structured data stored by the user.
+
+What is the server using to communicate with the computer of the user requesting the website  -- internet
+
+
+
+SPOF - Because our infrastructure relies on a single server it is vulnerable to down time due to hardware or network failure or other problems.
+
+During maintenance the website may be unavailable, as it requires to restart the web server.
+
+
+why can't we scale the infrastrucute
+- There is no load balancing so when there is too much traffic our server is unable to accomodate high traffic hence limited scalability.
+
+
+https://imgur.com/a/AhDATs2( image link)
