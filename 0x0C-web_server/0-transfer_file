@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check if at least 4 arguments are provided
+if [ $# -lt 4 ]; then
+  echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+  exit 1
+fi
+
+# Extract all the arguments
+file_path="$1"
+server_ip="$2"
+username="$3"
+key_path="$4"
+
+# Disable strict host key checking
+ssh -o StrictHostKeyChecking=no -i "$key_path" "$username"@"$server_ip" scp -p "$file_path" ~/
+
+# Exit script after execution
+exit 0
