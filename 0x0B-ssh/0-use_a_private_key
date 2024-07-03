@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-# Connects to server 18.210.10.4 with key in ~/.ssh/school
 
+# Connects to server 18.210.10.4 with key in ~/.ssh/school
 ssh -i ~/.ssh/school ubuntu@18.210.10.4
+
+# # Exit script after execution
+exit 0
