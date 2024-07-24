@@ -2,7 +2,7 @@
 # backup and compress my databases
 
 # Check if the password argument is provided
-if [ $# -ne 1 ]; then
+if [ "$#" -ne 1 ]; then
   echo "Usage: $0 <mysql_password>"
   exit 1
 fi
@@ -17,18 +17,14 @@ ARCHIVE_NAME="${DATE}.tar.gz"
 
 # Create the MySQL dump of all databases
 echo "Creating MySQL dump..."
-mysqldump -u root -p"${MYSQL_PASSWORD}" --all-databases > "${BACKUP_FILE}"
-
-if [ $? -ne 0 ]; then
+if ! mysqldump -u root -p"${MYSQL_PASSWORD}" --all-databases > "${BACKUP_FILE}"; then
   echo "Error: Failed to create MySQL dump."
   exit 1
 fi
 
 # Compress the dump file into a tar.gz archive
 echo "Compressing backup file..."
-tar -czf "${ARCHIVE_NAME}" "${BACKUP_FILE}"
-
-if [ $? -ne 0 ]; then
+if ! tar -czf "${ARCHIVE_NAME}" "${BACKUP_FILE}"; then
   echo "Error: Failed to compress the backup file."
   exit 1
 fi
