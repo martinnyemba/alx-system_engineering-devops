@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# This script displays information about subdomains of a given domain.
-# If no subdomain is provided, information about www, lb-01, web-01, and web-02 will be displayed.
-# If a subdomain is provided, information about that subdomain will be displayed.
+# Shows information about subdomains of a given domain.
+# If no subdomain is provided, information about www, lb-01, web-01, and web-02 will be shown.
+# If a subdomain is provided, information about that subdomain is shown.
 
 print_info () {
     dig "$1" | grep -A1 'ANSWER SECTION:' | sed -r "s/$1./$2/g" | awk -F" " ' NR==2 { print "The subdomain " $1 " is a " $4 " record and points to " $5 }'
