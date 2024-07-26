@@ -32,17 +32,16 @@ defaults
 	errorfile 502 /etc/haproxy/errors/502.http
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
-# This is the beginning of my configurations
+# my haproxy configurations
 frontend creativedigitalzambia.tech-http-frontend
-        bind     *:80
-        http-request set-header X-Forwarded-Proto http
-        default_backend  creativedigitalzambia.tech-backend
+	bind *:80
+	http-request set-header X-Forwarded-Proto http
+	default_backend creativedigitalzambia.tech-backend
 frontend  creativedigitalzambia.tech-https-frontend
-        bind *:443 ssl crt /etc/ssl/creativedigitalzambia.tech.pem
-        http-request set-header X-Forwarded-Proto https
-        default_backend creativedigitalzambia.tech-backend
+	bind *:443 ssl crt /etc/letsencrypt/live/www.creativedigitalzambia.tech/haproxy.pem
+	http-request set-header X-Forwarded-Proto https
+	default_backend creativedigitalzambia.tech-backend
 backend creativedigitalzambia.tech-backend
-    balance roundrobin
-    server 115888-web-01 18.210.10.4:80 check
-    server 115888-web-02 100.26.212.138:80 check
-# This is the end of configuration parameters
+	balance roundrobin
+	server 115888-web-01 18.210.10.4:80 check
+	server 115888-web-02 100.26.212.138:80 check
