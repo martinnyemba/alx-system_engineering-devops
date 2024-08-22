@@ -1,4 +1,5 @@
 # Increases the amount of traffic an Nginx server can handle.
+# For the benchmarking, we are using ApacheBench
 
 # Increase the ULIMIT of the default file
 exec { 'fix--for-nginx':
