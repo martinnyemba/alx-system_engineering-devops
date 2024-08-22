@@ -1,13 +1,13 @@
-# Increase the ULIMIT of the Nginx configuration
-exec { 'fix_ulimit_for_nginx':
-  command => 'sed -i "s/^ULIMIT/#ULIMIT/" /etc/default/nginx && echo "ULIMIT=\"-n 4096\"" >> /etc/default/nginx',
-  path    => '/usr/local/bin/:/bin/',
-  onlyif  => 'grep -q -e "^ULIMIT" /etc/default/nginx || echo 0',
+# Increases the amount of traffic an Nginx server can handle.
+
+# Increase the ULIMIT of the default file
+exec { 'fix--for-nginx':
+  command => 'sed -i "s/15/4096/" /etc/default/nginx',
+  path    => '/usr/local/bin/:/bin/'
 } ->
 
-# Restart Nginx to apply changes
+# Restart Nginx
 exec { 'nginx-restart':
-  command => '/etc/init.d/nginx restart',
-  path    => '/usr/local/bin/:/usr/bin/:/bin/:/sbin/:/usr/sbin/',
-  require => Exec['fix_ulimit_for_nginx'],
+  command => 'nginx restart',
+  path    => '/etc/init.d/'
 }
